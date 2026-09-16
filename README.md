@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.jpg" alt="iris — screenshots for coding agents" width="720">
+<img src="assets/hero.webp" alt="iris — screenshots for coding agents" width="720">
 
 # 👁️ /screenshot
 
@@ -42,7 +42,7 @@ waits for fonts, images, entrance animations — and lazy-loaded content on
 full-page mode — then hands your agent an image it can actually see.
 
 <div align="center">
-<img src="assets/how-it-works.jpg" alt="How it works: Claude Code → iris CLI → real Chrome (CDP) → @2x PNG" width="820">
+<img src="assets/how-it-works.webp" alt="How it works: Claude Code → iris CLI → real Chrome (CDP) → @2x PNG" width="820">
 </div>
 
 ## Install in 30 seconds
@@ -103,13 +103,13 @@ Or just talk to it:
 retina @2x, roughly 8 000 px tall. Scaled down to fit this page:
 
 <div align="center">
-<img src="assets/demo-full.png" alt="Full-page capture of bridger.to, taken by iris" width="620">
+<img src="assets/demo-full.webp" alt="Full-page capture of bridger.to, taken by iris" width="620">
 </div>
 
 ## The MCP camera is bundled
 
 <div align="center">
-<img src="assets/mcp-dark.jpg" alt="iris mcp — one tool, inline pixels" width="720">
+<img src="assets/mcp-dark.webp" alt="iris mcp — one tool, inline pixels" width="720">
 </div>
 
 **Zero setup.** Enabling the plugin registers the `iris` MCP server

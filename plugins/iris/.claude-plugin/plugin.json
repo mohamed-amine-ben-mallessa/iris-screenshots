@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "iris",
+  "displayName": "Iris Screenshot",
+  "version": "0.2.1",
+  "description": "Capture trustworthy screenshots of live websites with the iris CLI: full page, CSS element, mobile/desktop presets, dark mode, concurrent batch, JSON output. Self-installing (iris + Chrome for Testing) and includes an optional MCP camera server for agents.",
+  "author": {
+    "name": "Mohamed-Amine Ben Mallessa",
+    "url": "https://github.com/mohamed-amine-ben-mallessa"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/mohamed-amine-ben-mallessa/iris-screenshots",
+  "repository": "https://github.com/mohamed-amine-ben-mallessa/iris-screenshots",
+  "keywords": [
+    "screenshot",
+    "iris",
+    "web",
+    "visual-verification",
+    "capture",
+    "mcp",
+    "claude-code"
+  ]
+}

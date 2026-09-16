@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "iris": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/scripts/iris-mcp.sh",
+      "args": []
+    }
+  }
+}

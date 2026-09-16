@@ -1,0 +1,21 @@
+{
+  "name": "iris-screenshots",
+  "description": "Visual tooling for coding agents: iris-powered screenshots, responsive audits and visual diffs for live websites and local dev servers.",
+  "owner": {
+    "name": "Mohamed-Amine Ben Mallessa",
+    "url": "https://github.com/mohamed-amine-ben-mallessa"
+  },
+  "plugins": [
+    {
+      "name": "iris",
+      "source": "./plugins/iris",
+      "description": "Give Claude Code a reliable camera for live websites: iris-powered screenshots (full page, CSS element, mobile/desktop presets, dark mode, batch, JSON) with self-installing setup and an optional MCP capture tool.",
+      "version": "0.2.1",
+      "author": {
+        "name": "Mohamed-Amine Ben Mallessa",
+        "url": "https://github.com/mohamed-amine-ben-mallessa"
+      }
+    }
+  ],
+  "version": "0.2.1"
+}

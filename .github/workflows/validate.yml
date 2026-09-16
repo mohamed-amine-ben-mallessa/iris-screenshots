@@ -1,0 +1,90 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Validate plugin (strict)
+        run: claude plugin validate plugins/iris --strict
+
+      - name: Validate marketplace (strict)
+        run: claude plugin validate . --strict
+
+      - name: Shell syntax check
+        run: |
+          set -eu
+          status=0
+          for f in $(find . -name '*.sh' -type f); do
+            if sh -n "$f"; then
+              echo "ok       $f"
+            else
+              echo "SYNTAX   $f"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Scripts are executable
+        run: |
+          set -eu
+          status=0
+          for f in $(find . -name '*.sh' -type f); do
+            if [ -x "$f" ]; then
+              echo "+x       $f"
+            else
+              echo "NOT +x   $f  (the MCP wrapper is invoked directly; chmod +x and commit the mode)"
+              status=1
+            fi
+          done
+          exit $status
+
+      - name: Skill helper scripts are in sync
+        run: |
+          set -eu
+          for name in doctor.sh install.sh; do
+            count=$(md5sum plugins/iris/skills/*/scripts/"$name" | awk '{print $1}' | sort -u | wc -l)
+            if [ "$count" -ne 1 ]; then
+              echo "DRIFT: copies of $name differ across skills"
+              md5sum plugins/iris/skills/*/scripts/"$name"
+              exit 1
+            fi
+            echo "in sync: $name"
+          done
+
+      - name: JSON manifests
+        run: |
+          python3 -m json.tool .claude-plugin/marketplace.json
+          python3 -m json.tool plugins/iris/.claude-plugin/plugin.json
+          python3 -m json.tool plugins/iris/.mcp.json
+
+      - name: SKILL.md frontmatter presence
+        run: |
+          set -eu
+          for f in plugins/iris/skills/*/SKILL.md; do
+            head -1 "$f" | grep -q '^---' || { echo "missing frontmatter: $f"; exit 1; }
+            grep -q '^name:' "$f" || { echo "missing name: $f"; exit 1; }
+            grep -q '^description:' "$f" || { echo "missing description: $f"; exit 1; }
+          done
+          echo "frontmatter OK"
+
+      - name: No unsupported template variables in skills
+        run: |
+          set -eu
+          if grep -rn 'CLAUDE_SKILL_DIR' plugins/; then
+            echo "CLAUDE_SKILL_DIR is not expanded by Claude Code — use paths relative to the skill directory"
+            exit 1
+          fi
+          echo "no unsupported variables"
